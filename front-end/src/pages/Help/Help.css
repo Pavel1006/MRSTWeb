@@ -1,0 +1,23 @@
+.help-container {
+  max-width: 850px;
+  margin: 55px auto;
+  padding: 30px;
+  background-color: #e9f5f9;
+  border-radius: 14px;
+  font-family: 'Tahoma', Geneva, sans-serif;
+  color: #1a3b4c;
+  box-shadow: 0 5px 18px rgba(26,59,76,0.15);
+}
+
+.help-container h1 {
+  font-size: 2.4rem;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #0e557d;
+}
+
+.help-container p {
+  font-size: 1.12rem;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}

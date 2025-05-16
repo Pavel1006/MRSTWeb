@@ -1,0 +1,32 @@
+.faq-container {
+  max-width: 850px;
+  margin: 60px auto;
+  padding: 35px;
+  background-color: #f0f4f8;
+  border-radius: 15px;
+  font-family: 'Georgia', serif;
+  color: #222;
+}
+
+.faq-container h1 {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #20435c;
+}
+
+.faq-container section {
+  margin-bottom: 25px;
+}
+
+.faq-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #126f99;
+}
+
+.faq-container p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #444;
+}
