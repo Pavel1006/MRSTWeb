@@ -1,7 +1,12 @@
-﻿using System.Data.Entity;
-using RentalCAR.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using Domain.Entities;
 
-namespace RentalCAR.Domain.DbContext
+namespace Domain.DbContext
 {
     public class UserContext : System.Data.Entity.DbContext
     {
@@ -10,4 +15,3 @@ namespace RentalCAR.Domain.DbContext
         public DbSet<UDbTable> Users { get; set; }
     }
 }
-

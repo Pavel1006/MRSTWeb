@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RentalCAR.Helpers
+namespace Domain
 {
     public class Class1
     {
-        
     }
 }

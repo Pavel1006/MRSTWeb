@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RentalCAR.Domain
+namespace Helpers
 {
     public class Class1
     {

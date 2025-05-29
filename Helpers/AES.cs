@@ -3,15 +3,16 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace eUseControl.Helpers
+namespace Helpers
 {
     public class AES
     {
-        private static readonly string key = "your-32-char-aes-key-1234567890123456"; // Exact 32 caractere!
+        // Cheie de exact 32 caractere ASCII => 256-bit key
+        private static readonly string key = "12345678901234567890123456789012"; // 32 chars
 
         public static string Encrypt(string plainText)
         {
-            byte[] iv = new byte[16];
+            byte[] iv = new byte[16]; // IV static zero - pentru simplitate. Recomandat: random în producție
             byte[] encrypted;
 
             using (Aes aes = Aes.Create())
@@ -22,15 +23,12 @@ namespace eUseControl.Helpers
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
                 using (MemoryStream ms = new MemoryStream())
+                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                using (StreamWriter sw = new StreamWriter(cs))
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter sw = new StreamWriter(cs))
-                        {
-                            sw.Write(plainText);
-                        }
-                        encrypted = ms.ToArray();
-                    }
+                    sw.Write(plainText);
+                    sw.Close();
+                    encrypted = ms.ToArray();
                 }
             }
 
@@ -41,7 +39,6 @@ namespace eUseControl.Helpers
         {
             byte[] iv = new byte[16];
             byte[] buffer = Convert.FromBase64String(cipherText);
-            string plaintext = null;
 
             using (Aes aes = Aes.Create())
             {
@@ -51,18 +48,12 @@ namespace eUseControl.Helpers
                 ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
                 using (MemoryStream ms = new MemoryStream(buffer))
+                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                using (StreamReader sr = new StreamReader(cs))
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
-                    {
-                        using (StreamReader sr = new StreamReader(cs))
-                        {
-                            plaintext = sr.ReadToEnd();
-                        }
-                    }
+                    return sr.ReadToEnd();
                 }
             }
-
-            return plaintext;
         }
     }
 }
