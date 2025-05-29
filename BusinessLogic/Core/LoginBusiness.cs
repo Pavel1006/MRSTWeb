@@ -6,6 +6,12 @@ using Helpers;
 namespace BusinessLogic.Core
 {
     public class LoginBusiness
+
+
+
+
+
+
     {
         public bool RegisterUser(string username, string email, string password)
         {
@@ -31,7 +37,13 @@ namespace BusinessLogic.Core
             using (var db = new UserContext())
             {
                 var user = db.Users.FirstOrDefault(u => u.Username == username);
+
+                var nicu = "string";
                 return user != null && AES.Decrypt(user.Password) == password;
+
+
+
+
             }
         }
     }
