@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Optimization;
+using Helpers;
 
 namespace RentalCAR
 {
@@ -16,6 +15,13 @@ namespace RentalCAR
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DbSeeder.EnsureRolesExist();
         }
+
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            AuthHelper.SetPrincipalFromCookie();
+        }
+
     }
 }

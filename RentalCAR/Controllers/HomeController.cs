@@ -10,6 +10,9 @@ namespace RentalCAR.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = User.Identity.IsAuthenticated
+                ? $"Welcome, {User.Identity.Name}!"
+                : "You are not logged in.";
             return View();
         }
 
@@ -26,11 +29,11 @@ namespace RentalCAR.Controllers
 
             return View();
         }
-        public ActionResult Register()
+       /* public ActionResult Register()
         {
             ViewBag.Message = "Your contact page register.";
 
             return View();
-        }
+        }*/
     }
 }

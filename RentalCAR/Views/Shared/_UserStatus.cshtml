@@ -1,0 +1,31 @@
+﻿@{
+    var authCookie = Request.Cookies["AuthCookie"];
+    string[] roles = new string[0];
+    string username = null;
+
+    if (authCookie != null)
+    {
+        username = authCookie["Username"];
+        var rolesString = authCookie["Roles"];
+        if (!string.IsNullOrEmpty(rolesString))
+        {
+            roles = rolesString.Split(',');
+        }
+    }
+}
+
+@if (!string.IsNullOrEmpty(username))
+{
+    <li>
+        <p class="navbar-text">Logged in as <strong>@username</strong></p>
+    </li>
+    <li>
+        <p class="navbar-text">Roles: <strong>@string.Join(", ", roles)</strong></p>
+    </li>
+    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+}
+else
+{
+    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+}

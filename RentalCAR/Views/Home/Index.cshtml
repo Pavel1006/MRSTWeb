@@ -7,7 +7,18 @@
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
+<h2>@ViewBag.Message</h2>
 
+@if (User.Identity.IsAuthenticated)
+{
+    <p>You have the following roles:</p>
+    <ul>
+        @foreach (var role in ((System.Security.Principal.GenericPrincipal)User).Identity.Name.Split(','))
+        {
+            <li>@role</li>
+        }
+    </ul>
+}
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>

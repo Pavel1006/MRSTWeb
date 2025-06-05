@@ -1,49 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Web.Mvc;
 using System.Web;
-using System.Web.Mvc;
 using BusinessLogic.Core;
 
-namespace RentalCAR.Controllers
+public class AccountController : Controller
 {
-    public class AccountController : Controller
+    private LoginBusiness _login = new LoginBusiness();
+
+    [HttpGet]
+    public ActionResult Login() => View();
+
+    [HttpPost]
+    public ActionResult Login(string username, string password)
     {
-        private readonly LoginBusiness _service = new LoginBusiness();
+        if (_login.ValidateUser(username, password))
+            return RedirectToAction("Index", "Home");
 
-        [HttpGet]
-        public ActionResult Register() => View();
+        ViewBag.Error = "Invalid login.";
+        return View();
+    }
 
-        [HttpPost]
-        public ActionResult Register(string username, string email, string password)
-        {
-            if (_service.RegisterUser(username, email, password))
-                return RedirectToAction("Login");
+    [HttpGet]
+    public ActionResult Register() => View();
 
-            ViewBag.Message = "User already exists!";
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult Login() => View();
-
-        [HttpPost]
-        public ActionResult Login(string username, string password)
-        {
-            if (_service.ValidateUser(username, password))
-            {
-                Session["user"] = username;
-                return RedirectToAction("Index", "Home");
-            }
-
-            ViewBag.Message = "Invalid credentials";
-            return View();
-        }
-
-        public ActionResult Logout()
-        {
-            Session.Clear();
+    [HttpPost]
+    public ActionResult Register(string username, string email, string password)
+    {
+        if (_login.RegisterUser(username, email, password))
             return RedirectToAction("Login");
+
+        ViewBag.Error = "Username or email already exists.";
+        return View();
+    }
+
+    public ActionResult Logout()
+    {
+        if (Request.Cookies["AuthCookie"] != null)
+        {
+            var cookie = new HttpCookie("AuthCookie")
+            {
+                Expires = System.DateTime.Now.AddDays(-1)
+            };
+            Response.Cookies.Add(cookie);
         }
+        return RedirectToAction("Login");
     }
 }

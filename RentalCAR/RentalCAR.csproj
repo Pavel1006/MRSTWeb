@@ -171,6 +171,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_UserStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -194,6 +195,14 @@
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
       <Project>{1f2ef7fb-9370-47ff-8619-2f9760398be9}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{257da9cf-5272-42ad-bdb9-02106294311f}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{bfbbff2c-cc3f-4bb2-9e52-68d0c0064723}</Project>
+      <Name>Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

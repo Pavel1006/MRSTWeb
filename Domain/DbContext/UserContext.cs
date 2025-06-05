@@ -13,5 +13,6 @@ namespace Domain.DbContext
         public UserContext() : base("name=DefaultConnection") { }
 
         public DbSet<UDbTable> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }
