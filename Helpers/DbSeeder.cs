@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Domain.DbContext;
-using Domain.Entities;
+
+using Helpers.RoleSeeds;
 
 namespace Helpers
 {
@@ -10,13 +11,10 @@ namespace Helpers
         {
             using (var db = new UserContext())
             {
-                if (!db.Roles.Any())
-                {
-                    db.Roles.Add(new Role { Name = "User" });
-                    db.Roles.Add(new Role { Name = "Admin" });
-                    db.Roles.Add(new Role { Name = "Moderator" });
-                    db.SaveChanges();
-                }
+                UserSeeder.Seed(db);
+                ModeratorSeeder.Seed(db);
+                AdminSeeder.Seed(db);
+                AdminSeeder.EnsureAdminUser(db);
             }
         }
     }
